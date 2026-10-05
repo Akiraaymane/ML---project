@@ -1,0 +1,28 @@
+# Configuration de ChurnProfit
+seed: 42
+
+data:
+  # Chemin vers un CSV réel (ex : Telco Customer Churn de Kaggle).
+  # Laisser vide pour générer un jeu synthétique réaliste.
+  path: null
+  n_samples: 20000
+  target: churn
+  id_column: customer_id
+  test_size: 0.2
+
+# Économie de la campagne de rétention (en euros)
+economics:
+  contact_cost: 10.0         # coût d'un appel / email de rétention
+  incentive: 80.0            # remise offerte au client ciblé
+  accept_rate: 0.30          # proba qu'un churner ciblé accepte et reste
+  non_churner_accept_rate: 1.0  # un fidèle ciblé encaisse la remise
+  clv_months: 12             # horizon de valeur client (mois de facturation)
+
+training:
+  cv_folds: 5
+  models: [logreg, random_forest, hist_gbm]
+  calibrate: true
+
+output:
+  artifacts_dir: artifacts
+  reports_dir: reports
